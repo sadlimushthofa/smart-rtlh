@@ -6,6 +6,7 @@ use App\Http\Controllers\BobotKontroller;
 use App\Http\Controllers\NormalisasiBobotKontroller;
 use App\Http\Controllers\SubKriteriaKontroller;
 use App\Http\Controllers\PerhitunganController;
+use App\Http\Controllers\WargaController;
 use App\Models\Perhitungan;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,15 @@ Route::controller(KriteriaController::class)->prefix('kriteria')->group(function
     Route::get('edit/{id}', 'edit')->name('kriteria.edit');
     Route::post('edit/{id}', 'update')->name('kriteria.tambah.update');
     Route::get('hapus/{id}', 'hapus')->name('kriteria.hapus');
+});
+
+Route::controller(WargaController::class)->prefix('warga')->group(function(){
+    Route::get('', 'index')->name('warga');
+    Route::get('tambah', 'tambah')->name('warga.tambah');
+    Route::post('tambah', 'simpan')->name('warga.tambah.simpan');
+    Route::get('edit/{id}', 'edit')->name('warga.edit');
+    Route::post('edit/{id}', 'update')->name('warga.tambah.update');
+    Route::get('hapus/{id}', 'hapus')->name('warga.hapus');
 });
 
 Route::controller(BobotKontroller::class)->prefix('bobot')->group(function(){

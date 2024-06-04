@@ -18,6 +18,8 @@ return new class extends Migration
 
         Schema::create('alternatif', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedBigInteger('id_warga');
+            $table->foreign('id_warga')->references('id')->on('warga');
             $table->unsignedInteger('id_kriteria');
             $table->foreign('id_kriteria')->references('id')->on('kriteria')->onDelete('cascade');
             $table->integer('nilai');

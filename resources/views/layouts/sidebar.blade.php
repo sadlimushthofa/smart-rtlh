@@ -19,6 +19,12 @@
     </li>
 
     <li class="nav-item active">
+        <a class="nav-link" href="warga">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Data Warga</span></a>
+    </li>
+
+    <li class="nav-item active">
         <a class="nav-link" href="{{ route('kriteria') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Data Kriteria</span></a>

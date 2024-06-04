@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Alternatif;
 use App\Models\Kriteria;
 use App\Models\SubKriteria;
+use App\Models\Warga;
 use Illuminate\Http\Request;
+use Mockery\Matcher\Subset;
 
 class AlternatifKontroller extends Controller
 {
@@ -18,10 +20,11 @@ class AlternatifKontroller extends Controller
     {
         $alternatif = Alternatif::get();
         $kriteria = Kriteria::all();
-        $subkriteria = SubKriteria::all();
+        $subkriteria = SubKriteria::get();
+        $warga = Alternatif::get_warga();
 
 
-        return view('alternatif.index', ['alternatif'=>$alternatif], compact('kriteria', 'subkriteria'));
+        return view('alternatif.index', ['alternatif'=>$alternatif], compact('kriteria', 'subkriteria', 'warga'));
     }
 
     /**
@@ -33,8 +36,9 @@ class AlternatifKontroller extends Controller
     {
 
         $kriteria = Kriteria::get();
+        $warga = Warga::get();
 
-        return view('alternatif.form', compact('kriteria'));
+        return view('alternatif.form', compact('kriteria', 'warga'));
     }
 
     /**
@@ -53,17 +57,17 @@ class AlternatifKontroller extends Controller
 
         // Alternatif::create($data);
         $id_kriteria = $request->input('id_kriteria');
+        $id_warga = $request->input('id_warga');
         $nilai = $request->input('nilai');
         $i = 0;
 
         foreach ($nilai as $key) {
             $alternatif = Alternatif::firstOrCreate(
-                ['id_kriteria' => $id_kriteria[$i]],
+                ['id_kriteria' => $id_kriteria[$i], 'id_warga' => $id_warga],
                 ['nilai' => $key, 'created_at' => now()]
             );
             $i++;
         }
-
         return redirect()->route('alternatif');
     }
 
@@ -87,8 +91,11 @@ class AlternatifKontroller extends Controller
     public function edit($id)
     {
         $alternatif = Alternatif::find($id);
+        $kriteria = Kriteria::get();
+        $warga = Warga::get();
+        $subkriteria = SubKriteria::get();
 
-        return view('alternatif.form', ['alternatif' => $alternatif]);
+        return view('alternatif.form', compact('alternatif', 'warga', 'subkriteria', 'kriteria'));
     }
 
     /**

@@ -12,10 +12,25 @@
             <h6 class="m-0 font-weight-bold text-primary">{{ isset($alternatif) ? 'Form Edit Data Alternatif' : 'Form Tambah Data Alternatif' }}</h6>
           </div>
           <div class="card-body">
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="nama">Nama</label>
                 <input type="text" class="form-control" id="nama" name="nama" value="{{ isset($alternatif) ? $alternatif->nama : '' }}">
-            </div>
+            </div> --}}
+                {{-- @php
+                $nama_warga =
+                App\Models\Alternatif::nama_warga();
+                @endphp --}}
+                <div class="form-group">
+                    <label class="font-weight-bold" for="id_warga">nama</label>
+                    <select name="id_warga" class="form-control" id="id_warga"
+                        required>
+                        <option value="">--Pilih dong--</option>
+                        @foreach ($warga as $namawarga)
+                        <option value="{{ $namawarga->id }}">{{
+                            $namawarga->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
             @foreach ($kriteria as $key)
                 @php
                 $sub_kriteria =
@@ -34,7 +49,7 @@
                         @endforeach
                     </select>
                 </div>
-                @endforeach
+            @endforeach
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </div>

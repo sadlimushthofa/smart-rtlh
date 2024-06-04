@@ -30,7 +30,8 @@
                             <td>{{ $row->nilai }}</td>
                             <td>
                                 <a href="{{ route('subkriteria.edit', $row->id) }}" class="btn btn-warning"><i class="fas fa fa-edit"></i> Edit</a>
-                                <a href="{{ route('subkriteria.hapus', $row->id) }}" class="btn btn-danger"><i class="fas fa fa-trash-alt"></i> Hapus</a>
+                                <a href="{{ route('subkriteria.hapus', $row->id) }}" class="btn btn-danger"
+                                    onclick="return confirm('Apakah anda yakin ingin menghapus data sub kriteria ini ?')"><i><i class="fas fa fa-trash-alt"></i> Hapus</a>
                             </td>
                         </tr>
                         @endforeach

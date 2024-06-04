@@ -22,19 +22,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php($no = 1)
-                        @foreach ($alternatif as $row)
+                        @php
+                        $no=1;
+                        @endphp
+                        @foreach ($warga as $keys)
                         <tr>
-                            <th>{{ $no++ }}</th>
-                            <td>{{ $row->nama }}</td>
-                            @foreach ($alternatif as $key)
+                            <th>{{ $no }}</th>
+                            <td>{{ $keys->nama }}</td>
+                            @foreach ($kriteria as $key)
                             <td>
-                                {{ $key->nilai }}
+                                @php
+                                $data_pencocokan = App\Models\Alternatif::data_nilai($keys->id,
+                                $key->id);
+                                @endphp
+                                @if(!is_null($data_pencocokan) && isset($data_pencocokan->nilai))
+                                {{ $data_pencocokan->nama }}
+                                @endif
                             </td>
                             @endforeach
                             <td>
-                                <a href="{{ route('alternatif.edit', $row->id) }}" class="btn btn-warning"><i class="fas fa fa-edit"></i> Edit</a>
-                                <a href="{{ route('alternatif.hapus', $row->id) }}" class="btn btn-danger"><i class="fas fa fa-trash-alt"></i> Hapus</a>
+                                <a href="{{ route('alternatif.edit', $keys->id) }}" class="btn btn-warning"><i class="fas fa fa-edit"></i> Edit</a>
+                                <a href="{{ route('alternatif.hapus', $keys->id) }}" class="btn btn-danger"><i class="fas fa fa-trash-alt"></i> Hapus</a>
                             </td>
                         </tr>
                         @endforeach
